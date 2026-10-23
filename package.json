@@ -1,0 +1,50 @@
+{
+  "name": "dsh-plugin-context-window",
+  "version": "0.1.0",
+  "description": "Host-side DeepSeek Harness plugin: cap a model's context window and output budget per provider/model so auto-compaction fires where you want, and the UI context ring shows the real budget. Disabling the plugin restores the catalog defaults.",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "plugin",
+    "context-window",
+    "compaction",
+    "llm"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "tools",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LogicShao/dsh-plugin-context-window.git"
+  },
+  "homepage": "https://github.com/LogicShao/dsh-plugin-context-window#readme",
+  "bugs": {
+    "url": "https://github.com/LogicShao/dsh-plugin-context-window/issues"
+  },
+  "author": "mikoto",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "test": "node test/mechanism.test.mjs",
+    "compat": "node tools/compat-check.mjs"
+  }
+}

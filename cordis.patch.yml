@@ -1,0 +1,20 @@
+# dsh-plugin-context-window bundle layer.
+#
+# 只挂载本插件，不在配置里改动 `llm-pi-ai` 或任何模型行：
+# 封顶是插件在运行时通过包装 `llm.normalizeModelInfo` 完成的，插件卸载/停用时自动还原。
+# 因此「关掉插件 = 回到目录默认」是结构性的，不依赖谁去清理配置。
+#
+# 这里是插件的默认规则；改 provider/model/窗口不要改本文件，
+# 在 profile 的 cordis.patch.yml 里按 id `context-window-governor` 覆盖 config。
+# 本插件没有插件页表单（没有浏览器半侧）。
+#
+# 512K 窗口 + 64K 输出 → 压缩触发 393,216（窗口的 75%），压缩后保留约 73,400。
+# 改完要重启 DSH 才生效（bundle 层只在启动时读取）。
+- insert:
+    - id: context-window-governor
+      name: 'dsh-plugin-context-window'
+      config:
+        provider: opencode-go
+        model: deepseek-v4.1-flash
+        contextWindow: 524288
+        maxTokens: 65536
